@@ -3,6 +3,7 @@
     <Beverage :isIced="currentTemp === 'Cold'" />
     <ul>
       <li>
+        <span>Temperature: </span>
         <template v-for="temp in temps" :key="temp">
           <label>
             <input
@@ -16,6 +17,51 @@
           </label>
         </template>
       </li>
+      <li>
+        <span>Creamer: </span>
+        <template v-for="creamer in creamers" :key="creamer">
+          <label>
+            <input
+              type="radio"
+              name="creamer"
+              :id="`r${creamer}`"
+              :value="creamer"
+              v-model="currentCreamer"
+            />
+            {{ creamer }}
+          </label>
+        </template>
+      </li>
+      <li>
+        <span>Syrup: </span>
+        <template v-for="syrup in syrups" :key="syrup">
+          <label>
+            <input
+              type="radio"
+              name="creamer"
+              :id="`r${syrup}`"
+              :value="syrup"
+              v-model="currentSyrup"
+            />
+            {{ syrup }}
+          </label>
+        </template>
+      </li>
+      <li>
+        <span>Base: </span>
+        <template v-for="base in bases" :key="base">
+          <label>
+            <input
+              type="radio"
+              name="base"
+              :id="`r${base}`"
+              :value="base"
+              v-model="currentBase"
+            />
+            {{ base }}
+          </label>
+        </template>
+      </li>
     </ul>
   </div>
 </template>
@@ -25,7 +71,14 @@ import { ref } from "vue";
 import Beverage from "./components/Beverage.vue";
 // Define reactive data
 const temps = ref(["Hot", "Cold"]);
+const creamers = ref(["None", "Milk", "Cream", "Half & Half"]);
+const syrups = ref(["None", "Vanilla", "Caramel", "Hazelnut"]);
+const bases = ref(["Coffee", "Green Tea", "Black Tea"]);
+
 const currentTemp = ref("Hot");
+const currentCreamer = ref("None");
+const currentSyrup = ref("None");
+const currentBase = ref("Coffee");
 </script>
 
 <style lang="scss">
@@ -41,5 +94,8 @@ html {
 }
 ul {
   list-style: none;
+}
+span {
+  font-weight: bold
 }
 </style>
