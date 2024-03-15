@@ -38,7 +38,7 @@
           <label>
             <input
               type="radio"
-              name="creamer"
+              name="syrup"
               :id="`r${syrup}`"
               :value="syrup"
               v-model="currentSyrup"
