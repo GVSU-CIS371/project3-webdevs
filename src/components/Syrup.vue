@@ -1,5 +1,5 @@
 <template>
-  <div class="syrup"></div>
+  <div v-if="props.name != 'None'" class="syrup" :style="{backgroundColor: color}"></div>
 </template>
 
 <script setup lang="ts">
@@ -28,6 +28,14 @@ const Syrups: Syrup[] = [
 
 const props = withDefaults(defineProps<Prop>(), {
   name: "Vanilla",
+});
+
+const color = computed(() => {
+  for (const s of Syrups) {
+    if(props.name === s.name)
+      return s.color;
+  }
+  return "#FFFFFF"; //error case
 });
 </script>
 <style lang="scss" scoped>
