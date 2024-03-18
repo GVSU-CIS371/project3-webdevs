@@ -1,6 +1,6 @@
 <template>
-  <div class="froth">
-    <div v-for=" in 5" class="foam"></div>
+  <div  v-if="props.name != 'None'" class="froth">
+    <div v-for=" in 5" class="foam" :style="{backgroundColor: color}"></div>
   </div>
 </template>
 
@@ -31,7 +31,16 @@ const Creamers: Creamer[] = [
 const props = withDefaults(defineProps<Prop>(), {
   name: "Milk",
 });
+
+const color = computed(() => {
+  for (const c of Creamers) {
+    if(props.name === c.name)
+      return c.color;
+  }
+  return "#FFFFFF";
+});
 </script>
+
 <style lang="scss" scoped>
 .froth {
   overflow: visible;
