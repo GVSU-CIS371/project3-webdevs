@@ -67,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from "vue";  //testing github pages
 import Beverage from "./components/Beverage.vue";
 // Define reactive data
 const temps = ref(["Hot", "Cold"]);
@@ -99,3 +99,4 @@ span {
   font-weight: bold
 }
 </style>
+
