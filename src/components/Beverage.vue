@@ -10,7 +10,7 @@
         <Syrup />
       </template>
       <template v-slot:bottom>
-        <Base />
+        <Base :name="$props.beverage"/>
       </template>
     </Contents>
   </Mug>
@@ -28,7 +28,7 @@ type Props = {
   isIced: boolean;
   // creamer: string;
   // syrup: string;
-  // beverage: string;
+  beverage: string;
 };
 defineProps<Props>();
 </script>

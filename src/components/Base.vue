@@ -1,5 +1,5 @@
 <template>
-  <div class="baseBeverage"></div>
+  <div class="baseBeverage" :style="{backgroundColor: color}"></div>
 </template>
 
 <script setup lang="ts">
@@ -28,6 +28,15 @@ const Bases: BaseBeverage[] = [
 
 const props = withDefaults(defineProps<Prop>(), {
   name: "Black Tea",
+});
+
+const color = computed(() => {
+  for (const b of Bases) {
+    if (b.name === props.name){
+      return b.color;
+    }
+  }
+  return "#000000"; //error case
 });
 </script>
 
