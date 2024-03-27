@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
 
-type Recipe = {
-    name: string,
+export type Recipe = {
     temp: string,
-    beverage: string,
     creamer: string,
-    syrup: string
+    syrup: string,
+    base: string,
+    name: string,
 }
 
 export const useRecipeStore = defineStore('RecipeStore', {
@@ -14,4 +14,4 @@ export const useRecipeStore = defineStore('RecipeStore', {
             recipes: [] as Recipe[]
         };
     }
-})
+});

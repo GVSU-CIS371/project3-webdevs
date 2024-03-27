@@ -63,12 +63,26 @@
         </template>
       </li>
     </ul>
+
+    <input v-model="recipeName" placeholder="Recipe name">
+    <button @click="updateRecipeStore({
+      temp: currentTemp,
+      creamer: currentCreamer,
+      syrup: currentSyrup,
+      base: currentBase, 
+      name: recipeName
+    })">
+      Make beverage
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";  //testing github pages
+import { ref } from "vue";
 import Beverage from "./components/Beverage.vue";
+import {useRecipeStore} from "./RecipeStore";
+import {Recipe} from "./RecipeStore"
+
 // Define reactive data
 const temps = ref(["Hot", "Cold"]);
 const creamers = ref(["None", "Milk", "Cream", "Half & Half"]);
@@ -79,6 +93,12 @@ const currentTemp = ref("Hot");
 const currentCreamer = ref("None");
 const currentSyrup = ref("None");
 const currentBase = ref("Coffee");
+const recipeName = ref(""); // for name textbox
+
+const recipeStore = useRecipeStore();
+const updateRecipeStore = (recipe: Recipe) => {
+  recipeStore.$patch((state) => state.recipes.push(recipe));
+}
 </script>
 
 <style lang="scss">
