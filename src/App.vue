@@ -98,6 +98,7 @@ const recipeName = ref(""); // for name textbox
 const recipeStore = useRecipeStore();
 const updateRecipeStore = (recipe: Recipe) => {
   recipeStore.$patch((state) => state.recipes.push(recipe));
+  recipeName.value = "";
 }
 </script>
 
