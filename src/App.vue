@@ -97,18 +97,21 @@
 
 <!--I dont understand why recipeName, makeBeverage, recipeStore, and makeBeverage all have errors saying they aren't 
 declared but they are declared below-->
-<input v-model="recipeName" placeholder="Name">
-<button 
-  @click="updateRecipeStore({
+<div class="bev-inputs">
+  <input v-model="recipeName" placeholder="Name" id="bev-name">
+  <button 
+    @click="updateRecipeStore({
       temp: currentTemp,
       creamer: currentCreamer,
       syrup: currentSyrup,
       base: currentBase, 
       name: recipeName
     })"
->
-  Make Beverage
-</button>
+  >
+    Make Beverage
+  </button>
+</div>
+
 <ul class="recipe-ul">
   <li v-for="(recipe, index) in recipeStore.recipes" :key="index" @click="showBeverage(recipe)" :class="{'selected': recipe.name === recipeName}">
     {{ recipe.name }}
@@ -168,9 +171,6 @@ const showBeverage = (recipe: Recipe) => {
   recipeName.value = recipe.name;
 };
 
-
-
-
 </script>
 
 <style lang="scss">
@@ -206,6 +206,17 @@ span {
 }
 .selected {
   background-color: #c4c3be;
+}
+.bev-inputs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+#bev-name {
+  width: 70%;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
 }
 </style>
 
