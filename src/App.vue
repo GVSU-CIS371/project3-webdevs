@@ -98,14 +98,14 @@
 <!--I dont understand why recipeName, makeBeverage, recipeStore, and makeBeverage all have errors saying they aren't 
 declared but they are declared below-->
 <input v-model="recipeName" placeholder="Name">
-    <button @click="makeBeverage">Make Beverage</button>
+<button @click="makeBeverage">Make Beverage</button>
+<ul class="recipe-ul">
+  <li v-for="(recipe, index) in recipeStore.recipes" :key="index" @click="showBeverage(recipe)" :class="{'selected': recipe.name === recipeName}">
+    {{ recipe.name }}
+  </li>
+</ul>
 
-    <ul>
-      <li v-for="(recipe, index) in recipeStore.recipes" :key="index" @click="showBeverage(recipe)">
-        {{ recipe.name }}
-      </li>
-    </ul>
-  </div>
+</div>
 
 
 </template>
@@ -115,6 +115,7 @@ import { ref } from "vue";
 import Beverage from "./components/Beverage.vue";
 import {useRecipeStore} from "./RecipeStore";
 import {Recipe} from "./RecipeStore"
+//import { computed } from "vue";
 
 // Define reactive data
 const temps = ref(["Hot", "Cold"]);
@@ -154,7 +155,10 @@ const showBeverage = (recipe: Recipe) => {
   currentCreamer.value = recipe.creamer;
   currentSyrup.value = recipe.syrup;
   currentBase.value = recipe.base;
+  recipeName.value = recipe.name;
 };
+
+
 
 
 </script>
@@ -176,8 +180,22 @@ ul {
 span {
   font-weight: bold
 }
-.recipe-li {
-  
+.recipe-ul {
+  //style as a card
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-top: 20px;
+}
+.recipe-ul li {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+}
+.selected {
+  background-color: #c4c3be;
 }
 </style>
 
