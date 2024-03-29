@@ -98,7 +98,17 @@
 <!--I dont understand why recipeName, makeBeverage, recipeStore, and makeBeverage all have errors saying they aren't 
 declared but they are declared below-->
 <input v-model="recipeName" placeholder="Name">
-<button @click="makeBeverage">Make Beverage</button>
+<button 
+  @click="updateRecipeStore({
+      temp: currentTemp,
+      creamer: currentCreamer,
+      syrup: currentSyrup,
+      base: currentBase, 
+      name: recipeName
+    })"
+>
+  Make Beverage
+</button>
 <ul class="recipe-ul">
   <li v-for="(recipe, index) in recipeStore.recipes" :key="index" @click="showBeverage(recipe)" :class="{'selected': recipe.name === recipeName}">
     {{ recipe.name }}
@@ -129,25 +139,25 @@ const currentSyrup = ref("None");
 const currentBase = ref("Coffee");
 const recipeName = ref(""); // for name textbox
 
-/*const recipeStore = useRecipeStore();
+const recipeStore = useRecipeStore();
 const updateRecipeStore = (recipe: Recipe) => {
   recipeStore.$patch((state) => state.recipes.push(recipe));
   recipeName.value = "";
-}*/
+}
 
-const recipeStore = useRecipeStore();
+//const recipeStore = useRecipeStore();
 
-const makeBeverage = () => {
-  const newRecipe: Recipe = {
-    temp: currentTemp.value,
-    creamer: currentCreamer.value,
-    syrup: currentSyrup.value,
-    base: currentBase.value,
-    name: recipeName.value
-  };
-  recipeStore.addRecipe(newRecipe);
-  recipeName.value = ""; // Clear recipe name input
-};
+// const makeBeverage = () => {
+//   const newRecipe: Recipe = {
+//     temp: currentTemp.value,
+//     creamer: currentCreamer.value,
+//     syrup: currentSyrup.value,
+//     base: currentBase.value,
+//     name: recipeName.value
+//   };
+//   recipeStore.addRecipe(newRecipe);
+//   recipeName.value = ""; // Clear recipe name input
+// };
 
 // Display corresponding beverage based on the selected recipe
 const showBeverage = (recipe: Recipe) => {
