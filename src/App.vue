@@ -112,7 +112,7 @@ declared but they are declared below-->
   </button>
 </div>
 
-<ul class="recipe-ul">
+<ul class="recipe-ul" v-if="recipeStore.recipes.length != 0" >
   <li v-for="(recipe, index) in recipeStore.recipes" :key="index" @click="showBeverage(recipe)" :class="{'selected': recipe.name === recipeName}">
     {{ recipe.name }}
   </li>
