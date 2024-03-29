@@ -64,17 +64,38 @@
       </li>
     </ul>
 
-    <input v-model="recipeName" placeholder="Recipe name">
-    <button @click="updateRecipeStore({
-      temp: currentTemp,
-      creamer: currentCreamer,
-      syrup: currentSyrup,
-      base: currentBase, 
-      name: recipeName
-    })">
-      Make beverage
-    </button>
+    
   </div>
+  <input v-model="recipeName" placeholder="Recipe name">
+  <button @click="updateRecipeStore({
+    temp: currentTemp,
+    creamer: currentCreamer,
+    syrup: currentSyrup,
+    base: currentBase, 
+    name: recipeName
+  })">
+    Make beverage
+  </button>
+
+  <ul>
+    <li v-for="recipe in recipeStore.recipes" :key="recipe.name">
+      <div 
+        class="bev-li" 
+        @click="() => {
+          currentTemp = recipe.temp;
+          currentCreamer = recipe.creamer;
+          currentSyrup = recipe.syrup;
+          currentBase = recipe.base;
+          recipeName = recipe.name;
+        }"
+      >
+        {{ recipe.name }}
+      </div>
+    </li>
+  </ul>
+
+
+
 </template>
 
 <script setup lang="ts">
@@ -118,6 +139,9 @@ ul {
 }
 span {
   font-weight: bold
+}
+.recipe-li {
+  
 }
 </style>
 
