@@ -64,7 +64,7 @@
       </li>
     </ul>
 
-    
+    <!--
   </div>
   <input v-model="recipeName" placeholder="Recipe name">
   <button @click="updateRecipeStore({
@@ -93,7 +93,19 @@
       </div>
     </li>
   </ul>
+-->
 
+<!--I dont understand why recipeName, makeBeverage, recipeStore, and makeBeverage all have errors saying they aren't 
+declared but they are declared below-->
+<input v-model="recipeName" placeholder="Name">
+    <button @click="makeBeverage">Make Beverage</button>
+
+    <ul>
+      <li v-for="(recipe, index) in recipeStore.recipes" :key="index" @click="showBeverage(recipe)">
+        {{ recipe.name }}
+      </li>
+    </ul>
+  </div>
 
 
 </template>
@@ -116,11 +128,35 @@ const currentSyrup = ref("None");
 const currentBase = ref("Coffee");
 const recipeName = ref(""); // for name textbox
 
-const recipeStore = useRecipeStore();
+/*const recipeStore = useRecipeStore();
 const updateRecipeStore = (recipe: Recipe) => {
   recipeStore.$patch((state) => state.recipes.push(recipe));
   recipeName.value = "";
-}
+}*/
+
+const recipeStore = useRecipeStore();
+
+const makeBeverage = () => {
+  const newRecipe: Recipe = {
+    temp: currentTemp.value,
+    creamer: currentCreamer.value,
+    syrup: currentSyrup.value,
+    base: currentBase.value,
+    name: recipeName.value
+  };
+  recipeStore.addRecipe(newRecipe);
+  recipeName.value = ""; // Clear recipe name input
+};
+
+// Display corresponding beverage based on the selected recipe
+const showBeverage = (recipe: Recipe) => {
+  currentTemp.value = recipe.temp;
+  currentCreamer.value = recipe.creamer;
+  currentSyrup.value = recipe.syrup;
+  currentBase.value = recipe.base;
+};
+
+
 </script>
 
 <style lang="scss">
